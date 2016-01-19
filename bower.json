@@ -1,0 +1,10 @@
+{
+  "name": " ",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "jquery": "latest",
+    "bootstrap-sass-official": "~v3.3.4",
+    "font-awesome": "~4.4.0"
+  }
+}

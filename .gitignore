@@ -1,0 +1,11 @@
+.idea
+dist/
+.idea/*
+.DS_Store
+_.*
+._*
+
+bower_components/*
+node_modules/*
+dist/*
+.sass-cache/*
