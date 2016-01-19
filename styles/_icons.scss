@@ -1,0 +1,46 @@
+/*
+* Retina Sprites for Compass
+* by:              Andreas Sahle
+* forked from:     Retina-Sprites-for-Compass by Gaya Kessler
+* @see: https://github.com/Gaya/Retina-Sprites-for-Compass
+* last update:     04/13/14
+*
+* Usage:
+* 1. create a folder in your image directory (in this case 'icons').
+* 2. create sprite images for pixel ratio 1 screens and put them in the folder.
+* 4. create sprite images for pixel ratio 2 screens and put them in the folder,
+*    use the same filenames with a '-2x' suffix.
+* 5. use the sprite-image in your Sass/Scss using: '@include use-sprite(<sprite-name>, true)'
+*/
+
+//first we'll define the folder where the sprites are and their layout
+$icons: sprite-map("icons/*.png", $layout: smart) !default;
+$sprite-high-res-suffix: '-x2' !default;
+//
+////Sprite mixin, works perfectly with standard defines
+@mixin use-sprite($sprite, $sprite-retina: false, $sprite-map: $icons) {
+  $sprite-high-res: #{$sprite}#{$sprite-high-res-suffix};
+  background-image: sprite-url($sprite-map);
+  background-position: sprite-position($sprite-map, $sprite);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  height: image-height(sprite-file($sprite-map, $sprite));
+  width: image-width(sprite-file($sprite-map, $sprite));
+
+  @if $sprite-retina {
+    @media (-webkit-min-device-pixel-ratio: 2),
+    (-o-min-device-pixel-ratio: 3/2),
+    (min--moz-device-pixel-ratio: 2),
+    (min-device-pixel-ratio: 2), (min-resolution: 144dppx) {
+
+      background-size: (image-width(sprite-path($sprite-map)) / 2) (image-height(sprite-path($sprite-map)) / 2);
+      background-position: round(nth(sprite-position($sprite-map, $sprite-high-res), 1) / 2) round(nth(sprite-position($sprite-map, $sprite-high-res), 2) / 2);
+      height: image-height(sprite-file($sprite-map, $sprite));
+      width: image-width(sprite-file($sprite-map, $sprite));
+    }
+  }
+}
+
+.ico-arrow {
+  @include use-sprite('arrow');
+}
